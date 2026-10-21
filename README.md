@@ -19,7 +19,7 @@ This tool automates display resolution switching when the game launches and rest
 - Delta Force
 - A monitor and graphics configuration supporting a suitable 4:3 resolution
 - Administrator privileges for installation
-- [QRes 1.1](https://www.softpedia.com/get/Multimedia/Video/Other-VIDEO-Tools/QRes.shtml) by Anders Kjersem
+- QRes 1.1 by Anders Kjersem
 
 ## Configuration
 
@@ -39,22 +39,51 @@ Enable full-screen scaling in your graphics control panel so the 4:3 image stret
 
 Menu names and available options may vary depending on your GPU, driver, and display configuration.
 
-## Installation & Usage
+## Installation
 
-1. Download or clone this repository.
-2. Ensure QRes 1.1 is available in the location expected by the tool.
-3. Run `Install.bat` with administrator privileges.
-4. Launch the game using the **Play Delta Force 4-3** desktop shortcut.
-5. The tool detects when Delta Force starts and switches to the selected 4:3 resolution.
-6. Close Delta Force when finished. Your original display resolution and refresh rate will be restored.
+1. Download the release ZIP and extract its contents.
+2. Ensure `QRes.exe` is available in the location expected by the tool.
+3. Run `Install.bat` as administrator.
+4. If Windows blocks the PowerShell script due to an execution policy restriction, follow the instructions below.
+5. Once installed, launch the tool using the **Play Delta Force 4-3** desktop shortcut.
+
+## PowerShell Execution Policy
+
+The tool uses a PowerShell (`.ps1`) script to monitor Delta Force and handle resolution switching.
+
+**You may not need to change anything.** If the script runs normally, leave your PowerShell settings as they are.
+
+If Windows blocks the script because of your execution policy, open PowerShell and check the current policy:
+
+```powershell
+Get-ExecutionPolicy
+```
+
+If necessary, allow locally created scripts for your user account by running:
+
+```powershell
+Set-ExecutionPolicy -Scope CurrentUser RemoteSigned
+```
+
+Confirm the change if prompted, then try launching the tool again.
+
+**Security note:** Only run scripts you trust. Avoid setting the policy to `Unrestricted` or disabling security protections globally. If your computer is managed by an organization, its policies may prevent you from changing this setting.
+
+## Usage
+
+1. Launch **Play Delta Force 4-3** using the desktop shortcut.
+2. The tool monitors Delta Force and detects when the game starts.
+3. The display switches to the selected 4:3 resolution.
+4. Play Delta Force in borderless windowed mode with GPU full-screen scaling enabled.
+5. Close Delta Force when finished. The tool restores your original display resolution and refresh rate.
+
+If no suitable 4:3 resolution is detected, the tool uses **1024×768** as a fallback.
 
 ## How It Works
 
-The tool monitors the Delta Force process in the background. When the game launches, it uses QRes to switch Windows to a supported 4:3 resolution. Your GPU's full-screen scaling stretches the image to fill your monitor.
+The tool monitors the Delta Force process in the background. When the game launches, it uses QRes to switch Windows to a supported 4:3 resolution. Your GPU's full-screen scaling then stretches the image to fill your 16:9 monitor.
 
 When the game closes, the tool restores your original display settings.
-
-If no suitable 4:3 resolution is detected, the tool uses **1024×768** as a fallback.
 
 ## Third-Party Software
 
@@ -63,12 +92,10 @@ This project uses **QRes 1.1** by Anders Kjersem to change display resolutions.
 - Original download: [QRes on Softpedia](https://www.softpedia.com/get/Multimedia/Video/Other-VIDEO-Tools/QRes.shtml)
 - Copyright © 2003 Anders Kjersem. All rights reserved.
 
-QRes includes its own disclaimer and is a third-party utility, not developed or maintained by this project. Its original copyright notice and applicable terms must be respected.
+QRes is a third-party utility and is not developed or maintained by this project. Please respect its original copyright notice and applicable distribution terms.
 
 ## Disclaimer
 
 This is an unofficial community tool and is not affiliated with, endorsed by, or supported by the developers of Delta Force.
 
 Use at your own risk. Resolution switching depends on your monitor, GPU, drivers, and supported display modes.
-
-
